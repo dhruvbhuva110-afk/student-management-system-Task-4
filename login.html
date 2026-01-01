@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Student Management System</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-logo">
+                <svg width="48" height="48" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="10" fill="var(--primary)" />
+                    <path d="M16 8L22 12V20L16 24L10 20V12L16 8Z" fill="white" opacity="0.9" />
+                </svg>
+            </div>
+            <h2 class="auth-title">Welcome Back</h2>
+            <p class="auth-subtitle">Log in to your account</p>
+
+            <form id="loginForm" class="text-start">
+                <div class="mb-3">
+                    <label for="email" class="form-label small text-secondary">Username or Email</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-input border-0 text-secondary"
+                            style="background: var(--bg-input);"><i class="bi bi-person"></i></span>
+                        <input type="email" class="form-control" id="email" required placeholder="name@example.com">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label small text-secondary">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-input border-0 text-secondary"
+                            style="background: var(--bg-input);"><i class="bi bi-lock"></i></span>
+                        <input type="password" class="form-control" id="password" required placeholder="••••••••">
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input bg-dark border-secondary" type="checkbox" id="remember">
+                        <label class="form-check-label small text-secondary" for="remember">Remember me</label>
+                    </div>
+                    <a href="forgot-password.html" class="small text-primary">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mb-3" id="loginBtn">Log In</button>
+
+                <div class="text-center small text-secondary">
+                    <span>Or</span>
+                </div>
+
+                <div class="text-center mt-3 small">
+                    <span class="text-secondary">Don't have an account? </span>
+                    <a href="register.html" class="text-primary fw-bold">Register here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="toastMessage">
+                    Welcome back!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            checkLoginState(true);
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+        });
+    </script>
+</body>
+
+</html>

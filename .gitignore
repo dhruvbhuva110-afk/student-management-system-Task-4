@@ -1,0 +1,32 @@
+# Database configuration
+config/database.php
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Log files
+*.log
+error.log
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Vendor directories
+vendor/
+node_modules/
+
+# Environment files
+.env
+.env.local

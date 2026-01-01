@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Chart | Student Management System</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="10" fill="var(--primary)" />
+                        <path d="M16 8L22 12V20L16 24L10 20V12L16 8Z" fill="white" opacity="0.9" />
+                    </svg>
+                    <span data-i18n="app_name">StudentMS</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle" title="Toggle Sidebar">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+            </div>
+
+            <!-- Profile Section in Sidebar -->
+            <div class="sidebar-user-profile px-3 py-4 border-bottom border-light border-opacity-10 mb-2">
+                <div class="d-flex align-items-center">
+                    <div class="avatar me-3" id="sidebarUserAvatar"
+                        style="width: 48px; height: 48px; font-size: 1.2rem; background: var(--gradient-primary);">
+                        U
+                    </div>
+                    <div class="user-info overflow-hidden">
+                        <h6 class="mb-0 text-white text-truncate" id="sidebarUserName">User Name</h6>
+                        <small class="text-secondary d-block text-truncate"
+                            id="sidebarUserEmail">user@example.com</small>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">
+                        <i class="bi bi-grid-fill"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="students.html" class="nav-link">
+                        <i class="bi bi-people"></i>
+                        <span>Students</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="charts.html" class="nav-link active">
+                        <i class="bi bi-bar-chart-fill"></i>
+                        <span data-i18n="charts">Bar Chart</span>
+                    </a>
+                </li>
+                <li class="nav-item admin-only d-none">
+                    <a href="activity-logs.html" class="nav-link">
+                        <i class="bi bi-clock-history"></i>
+                        <span>Activity Logs</span>
+                    </a>
+                </li>
+                <li class="nav-item admin-only d-none">
+                    <a href="users.html" class="nav-link">
+                        <i class="bi bi-shield-lock"></i>
+                        <span>User Management</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <ul>
+                    <li class="nav-item">
+                        <a href="profile.html" class="nav-link">
+                            <i class="bi bi-person-circle"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link text-danger" id="logoutBtn">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="d-flex align-items-center">
+                    <button class="mobile-nav-toggle" id="mobileToggle">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <div class="header-title">
+                        <h1 data-i18n="charts">Charts</h1>
+                    </div>
+                </div>
+
+                <div class="header-actions">
+                    <div class="profile-trigger dropdown" data-bs-toggle="dropdown" aria-expanded="false"
+                        style="cursor: pointer;">
+                        <div class="avatar" id="userAvatar">A</div>
+                        <span class="d-none d-md-block" id="userName">Admin User</span>
+                        <i class="bi bi-chevron-down small text-muted"></i>
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                        <li>
+                            <div class="px-3 py-2 border-bottom border-light border-opacity-10 mb-2">
+                                <h6 class="mb-0 text-white" id="userNameDropdown">User Name</h6>
+                                <small class="text-secondary" id="userEmailDropdown">user@example.com</small>
+                            </div>
+                        </li>
+                        <li><a class="dropdown-item" href="profile.html"><i class="bi bi-person me-2"></i>My Profile</a>
+                        </li>
+                        <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear me-2"></i>Settings</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item text-danger logout-btn" href="#"><i
+                                    class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="content-body">
+                <!-- Charts Section -->
+                <div class="row g-4 mb-4">
+                    <div class="col-12">
+                        <div class="card-dark h-100">
+                            <h5 class="mb-4">Student Course Distribution</h5>
+                            <!-- Description -->
+                            <p class="text-secondary mb-4">Visualizing the number of students enrolled in each course.
+                            </p>
+
+                            <div class="chart-container" style="height: 500px; position: relative;">
+                                <canvas id="courseChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Course Details Modal -->
+    <div class="modal fade" id="courseDetailsModal" tabindex="-1" aria-labelledby="courseDetailsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content modal-content-dark">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="courseDetailsModalLabel">Students in Course</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-dark table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="ps-4">ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th class="pe-4">Enrollment Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="courseStudentsList">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/auth.js"></script>
+    <!-- We need app.js to fetch data first -->
+    <script src="js/app.js"></script>
+    <script src="js/charts.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // We need to wait for app.js to fetch students potentially, or verify if loadStudents works
+            // app.js calls loadStudents on DOMContentLoaded.
+            // loadStudents calls updateStats -> updateCharts.
+
+            // However, app.js might not init charts if it doesn't find charts functions.
+            // Our charts.js defines initializeCharts, updateCharts etc.
+
+            // Let's ensure initializeCharts is called if app.js doesn't do it in time or context specific
+            // Actually app.js contains: "if (typeof initializeCharts === 'function') setTimeout(initializeCharts, 100);"
+            // So it should work automatically.
+
+            // Manually check if canvas exists
+            const ctx = document.getElementById('courseChart');
+            if (ctx) {
+                // Force init if not done by app.js (though app.js should handle it)
+                // But app.js logic is: on load -> checkLogin -> loadStudents -> data? -> updateStats -> updateCharts
+
+                // If data isn't loaded yet, charts might be empty.
+                // app.js will fetch data and call updateCharts.
+            }
+        });
+    </script>
+</body>
+
+</html>
